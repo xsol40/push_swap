@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-hiak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-hiak <mel-hiak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 11:25:25 by mel-hiak          #+#    #+#             */
-/*   Updated: 2024/02/25 18:39:20 by mel-hiak         ###   ########.fr       */
+/*   Updated: 2024/03/22 21:05:29 by mel-hiak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,25 @@
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
+	t_stack	*b;
 
 	if (argc < 2)
-		return 1;
+		return (1);
 	a = NULL;
+	b = NULL;
 	ft_process(&a, argc, argv);
 	if (!a || ft_checkdup(a))
+		ft_free_error(&a);
+	if (!checksorted(a))
 	{
-		ft_free(&a);
-		ft_error();
+		if (ft_lstsize(a) == 2)
+			ft_sa(&a, 0);
+		else if (ft_lstsize(a) == 3)
+			ft_sort_tree(&a);
+		else if (ft_lstsize(a) <= 5)
+			ft_sort_five(&a, &b);
+		else
+			ft_sort(&a, &b, ft_lstsize(a));
 	}
-	t_stack *curr = a;
-	while (curr)
-	{
-		printf("%d\n", curr->nb);
-		curr = curr->next;
-	}
-	
-//	if (!checksorted(a))
-//		ft_sort(&a);
-//	ft_free(&a);
-	return (0);
+	ft_free_stack(&a, &b);
 }

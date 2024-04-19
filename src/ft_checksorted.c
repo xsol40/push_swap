@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_checksorted.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-hiak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-hiak <mel-hiak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 10:14:51 by mel-hiak          #+#    #+#             */
-/*   Updated: 2024/02/20 10:37:13 by mel-hiak         ###   ########.fr       */
+/*   Created: 2024/03/04 18:16:18 by mel-hiak          #+#    #+#             */
+/*   Updated: 2024/03/22 20:10:47 by mel-hiak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_error(void)
+int	checksorted(t_stack *a)
 {
-	write (1, "Error\n", 6);
-	exit(1);
+	int	i;
+
+	if (!a)
+		return (0);
+	i = a->nb;
+	while (a)
+	{
+		if (i > a->nb)
+			return (0);
+		i = a->nb;
+		a = a->next;
+	}
+	return (1);
 }

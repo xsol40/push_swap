@@ -1,5 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-hiak <mel-hiak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/04 17:51:17 by mel-hiak          #+#    #+#             */
+/*   Updated: 2024/03/04 17:51:53 by mel-hiak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
 static int	count_words(char const *s, char del)
 {
 	int	i;
@@ -68,13 +80,4 @@ char	**ft_split(char *s, char c)
 		return (NULL);
 	result = fill_array(s, c, result, words_count);
 	return (result);
-}
-
-int main()
-{
-	char str[] = "4   ";
-	char **res = ft_split(str, ' ');
-	int i = 0;
-	while (res[i])
-		printf("%s\n",res[i++]);
 }

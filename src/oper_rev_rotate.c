@@ -1,42 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operation.c                                        :+:      :+:    :+:   */
+/*   oper_rev_rotate.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-hiak <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mel-hiak <mel-hiak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/26 09:17:55 by mel-hiak          #+#    #+#             */
-/*   Updated: 2024/02/25 18:03:09 by mel-hiak         ###   ########.fr       */
+/*   Created: 2024/01/27 08:25:57 by mel-hiak          #+#    #+#             */
+/*   Updated: 2024/03/17 16:00:34 by mel-hiak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*ft_lstlast(t_stack *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next != NULL)
-	{
-		lst = lst->next;
-	}
-	return (lst);
-}
-
-void	ft_sa(t_stack **a)
-{
-	t_stack	*tmp;
-
-	if (!*a || !((*a)->next))
-		return ;
-	tmp = *a;
-	*a = (*a)->next;
-	tmp->next = tmp->next->next;
-	(*a)->next = tmp;
-	write(1, "sa\n", 3);
-}
-
-void	ft_rra(t_stack **a)
+void	ft_rra(t_stack **a, int j)
 {
 	t_stack	*tmp;
 	int		i;
@@ -57,18 +33,39 @@ void	ft_rra(t_stack **a)
 		i--;
 	}
 	tmp->next = NULL;
-	write(1, "rra\n", 4);
+	if (j == 0)
+		write(1, "rra\n", 4);
 }
 
-void	ft_ra(t_stack **a)
+void	ft_rrb(t_stack **b, int j)
 {
 	t_stack	*tmp;
+	int		i;
 
-	if (!*a || !(*a)->next)
+	if (!*b || !((*b)->next))
 		return ;
-	tmp = *a;
-	*a = ft_lstlast(*a);
-	(*a)->next = tmp;
-	*a = tmp->next;
+	i = 0;
+	tmp = *b;
+	while ((*b)->next)
+	{
+		(*b) = (*b)->next;
+		i++;
+	}
+	(*b)->next = tmp;
+	while (i > 1)
+	{
+		tmp = tmp->next;
+		i--;
+	}
 	tmp->next = NULL;
+	if (j == 0)
+		write (1, "rrb\n", 4);
+}
+
+void	ft_rrr(t_stack **a, t_stack **b, int i)
+{
+	ft_rra(a, 1);
+	ft_rrb(b, 1);
+	if (i == 0)
+		write (1, "rrr\n", 4);
 }
